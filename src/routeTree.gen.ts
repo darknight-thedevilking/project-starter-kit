@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AskRouteImport } from './routes/ask'
+import { Route as ContradictionsRouteImport } from './routes/contradictions'
+import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as TruthRouteImport } from './routes/truth'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AskRoute = AskRouteImport.update({
+  id: '/ask',
+  path: '/ask',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContradictionsRoute = ContradictionsRouteImport.update({
+  id: '/contradictions',
+  path: '/contradictions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TruthRoute = TruthRouteImport.update({
+  id: '/truth',
+  path: '/truth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/contradictions': typeof ContradictionsRoute
+  '/timeline': typeof TimelineRoute
+  '/truth': typeof TruthRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/contradictions': typeof ContradictionsRoute
+  '/timeline': typeof TimelineRoute
+  '/truth': typeof TruthRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ask': typeof AskRoute
+  '/contradictions': typeof ContradictionsRoute
+  '/timeline': typeof TimelineRoute
+  '/truth': typeof TruthRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/ask' | '/contradictions' | '/timeline' | '/truth'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/ask' | '/contradictions' | '/timeline' | '/truth'
+  id: '__root__' | '/' | '/ask' | '/contradictions' | '/timeline' | '/truth'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AskRoute: typeof AskRoute
+  ContradictionsRoute: typeof ContradictionsRoute
+  TimelineRoute: typeof TimelineRoute
+  TruthRoute: typeof TruthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ask': {
+      id: '/ask'
+      path: '/ask'
+      fullPath: '/ask'
+      preLoaderRoute: typeof AskRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contradictions': {
+      id: '/contradictions'
+      path: '/contradictions'
+      fullPath: '/contradictions'
+      preLoaderRoute: typeof ContradictionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/truth': {
+      id: '/truth'
+      path: '/truth'
+      fullPath: '/truth'
+      preLoaderRoute: typeof TruthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AskRoute: AskRoute,
+  ContradictionsRoute: ContradictionsRoute,
+  TimelineRoute: TimelineRoute,
+  TruthRoute: TruthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
